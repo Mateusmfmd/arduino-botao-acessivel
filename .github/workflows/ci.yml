@@ -1,0 +1,27 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Testes estruturais
+        run: |
+          python -m pip install --upgrade pip pytest
+          pytest -q
+      - name: Instalar Arduino CLI
+        uses: arduino/setup-arduino-cli@v2
+      - name: Configurar core AVR
+        run: |
+          arduino-cli config init --overwrite
+          arduino-cli core update-index
+          arduino-cli core install arduino:avr
+      - name: Compilar sketch
+        run: arduino-cli compile --fqbn arduino:avr:uno .
