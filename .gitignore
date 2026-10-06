@@ -4,3 +4,5 @@ Thumbs.db
 *.hex
 *.elf
 *.map
+__pycache__/
+*.pyc
