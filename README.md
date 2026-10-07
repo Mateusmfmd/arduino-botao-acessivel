@@ -1,4 +1,5 @@
 # arduino-botao-acessivel
+[![CI](https://github.com/Mateusmfmd/arduino-botao-acessivel/actions/workflows/ci.yml/badge.svg)](https://github.com/Mateusmfmd/arduino-botao-acessivel/actions/workflows/ci.yml)
 
 Botão de acionamento amplo em Arduino para interfaces assistivas. O projeto transforma uma ação física simples em eventos seriais que podem ser consumidos por um aplicativo, uma ponte Python ou outro dispositivo.
 
@@ -51,6 +52,26 @@ Não conecte o botão diretamente ao 5V: o sketch usa o resistor de pull-up inte
 4. Abra o Monitor Serial em **9600 baud**.
 5. Pressione e solte o botão para observar os eventos.
 
+O firmware não depende de serviços externos: depois de instalado, ele funciona
+diretamente na placa e usa somente a porta serial USB para comunicar os eventos.
+
+## Validação local
+
+Os testes estruturais verificam a configuração essencial do sketch, o protocolo
+serial, a documentação, a licença, a CI e a ausência de caches versionados:
+
+```bash
+python -m pip install pytest
+pytest -q
+```
+
+Com o Arduino CLI instalado, também é possível validar a compilação para Arduino
+Uno:
+
+```bash
+arduino-cli compile --fqbn arduino:avr:uno .
+```
+
 ## Protocolo serial
 
 Cada evento ocupa uma linha:
@@ -99,4 +120,4 @@ MIT. Veja [LICENSE](LICENSE).
 
 ## Autor
 
-Mateus Florido Pena — [GitHub](https://github.com/Mateusmfmd)
+Mateus Florido Pena
