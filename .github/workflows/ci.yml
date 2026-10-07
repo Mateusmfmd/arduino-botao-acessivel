@@ -25,3 +25,5 @@ jobs:
           arduino-cli core install arduino:avr
       - name: Compilar sketch
         run: arduino-cli compile --fqbn arduino:avr:uno .
+      - name: Verificar arquivos ignorados versionados
+        run: test -z "$(git ls-files -ci --exclude-standard)"
